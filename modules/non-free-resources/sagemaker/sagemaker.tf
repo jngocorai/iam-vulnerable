@@ -4,7 +4,8 @@ resource "aws_sagemaker_notebook_instance" "privesc-sagemakerNotebook" {
   instance_type = "ml.t2.medium"
 
   tags = {
-    Name = "foo"
+    Name      = "foo"
+    yor_trace = "0d170803-b8a9-4d12-8f65-226193ffeab2"
   }
 }
 
@@ -12,6 +13,9 @@ resource "aws_sagemaker_notebook_instance" "privesc-sagemakerNotebook" {
 resource "aws_iam_role" "privesc-sagemaker-role" {
   name               = "privesc-sagemaker-role"
   assume_role_policy = data.aws_iam_policy_document.example.json
+  tags = {
+    yor_trace = "f4df0f70-f3ba-43af-9d4d-fefb7cc7bca0"
+  }
 }
 
 data "aws_iam_policy_document" "example" {
@@ -34,12 +38,15 @@ resource "aws_iam_policy" "privesc-high-priv-sagemaker-policy" {
     Version = "2012-10-17"
     Statement = [
       {
-        Action = "*"
+        Action   = "*"
         Effect   = "Allow"
         Resource = "*"
       },
     ]
   })
+  tags = {
+    yor_trace = "56076cd4-d2ce-4342-9495-930c721207d6"
+  }
 }
 
 

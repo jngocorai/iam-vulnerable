@@ -12,16 +12,19 @@ resource "aws_iam_policy" "fp3-deny-iam" {
     Statement = [
       {
         Effect   = "Deny"
-        Action = "iam:*"        
+        Action   = "iam:*"
         Resource = "*"
       }
     ]
   })
+  tags = {
+    yor_trace = "6f5761df-c128-42d0-80fb-2213d39b4fab"
+  }
 }
 
 resource "aws_iam_role" "fp3-deny-iam-role" {
-  name                = "fp3-deny-iam-role"
-  assume_role_policy  = jsonencode({
+  name = "fp3-deny-iam-role"
+  assume_role_policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
       {
@@ -34,15 +37,21 @@ resource "aws_iam_role" "fp3-deny-iam-role" {
       },
     ]
   })
+  tags = {
+    yor_trace = "89337d54-667d-45c4-8954-0eb99e529451"
+  }
 }
 
 resource "aws_iam_user" "fp3-deny-iam-user" {
   name = "fp3-deny-iam-user"
   path = "/"
+  tags = {
+    yor_trace = "7847ac14-7902-4a51-bb9a-e788ff3f6d5c"
+  }
 }
 
 resource "aws_iam_access_key" "fp3-deny-iam-user" {
- user = aws_iam_user.fp3-deny-iam-user.name
+  user = aws_iam_user.fp3-deny-iam-user.name
 }
 
 resource "aws_iam_user_policy_attachment" "fp3-deny-iam-user-attach-policy" {

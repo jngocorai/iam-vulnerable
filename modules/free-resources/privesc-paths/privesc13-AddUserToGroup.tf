@@ -9,17 +9,20 @@ resource "aws_iam_policy" "privesc13-AddUserToGroup" {
     Version = "2012-10-17"
     Statement = [
       {
-        Action = "iam:AddUserToGroup"
+        Action   = "iam:AddUserToGroup"
         Effect   = "Allow"
         Resource = "*"
       },
     ]
   })
+  tags = {
+    yor_trace = "f17c31af-39bb-4bc1-bc7b-ea9de9faa5aa"
+  }
 }
 
 resource "aws_iam_role" "privesc13-AddUserToGroup-role" {
-  name                = "privesc13-AddUserToGroup-role"
-  assume_role_policy  = jsonencode({
+  name = "privesc13-AddUserToGroup-role"
+  assume_role_policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
       {
@@ -32,11 +35,17 @@ resource "aws_iam_role" "privesc13-AddUserToGroup-role" {
       },
     ]
   })
+  tags = {
+    yor_trace = "10d3b2bb-1b64-4caf-b51e-26242bf96347"
+  }
 }
 
 resource "aws_iam_user" "privesc13-AddUserToGroup-user" {
   name = "privesc13-AddUserToGroup-user"
   path = "/"
+  tags = {
+    yor_trace = "16e33611-036d-4785-afa7-dcb5d1b870f2"
+  }
 }
 
 resource "aws_iam_access_key" "privesc13-AddUserToGroup-user" {

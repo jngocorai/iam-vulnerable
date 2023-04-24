@@ -1,5 +1,5 @@
 resource "aws_cloudformation_stack" "privesc-cloudformationStack" {
-  name = "privesc-cloudformationStack"
+  name         = "privesc-cloudformationStack"
   iam_role_arn = var.shared_high_priv_servicerole
 
   template_body = <<STACK
@@ -16,5 +16,8 @@ resource "aws_cloudformation_stack" "privesc-cloudformationStack" {
   }
 }
 STACK
+  tags = {
+    yor_trace = "e78048b5-7d6f-4e74-b583-0d7278174281"
+  }
 }
 

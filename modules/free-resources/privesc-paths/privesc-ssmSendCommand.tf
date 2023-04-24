@@ -9,7 +9,7 @@ resource "aws_iam_policy" "privesc-ssmSendCommand-policy" {
     Version = "2012-10-17"
     Statement = [
       {
-        Effect   = "Allow"
+        Effect = "Allow"
         Action = [
           "ec2:DescribeInstances",
           "ssm:listCommands",
@@ -20,13 +20,16 @@ resource "aws_iam_policy" "privesc-ssmSendCommand-policy" {
       },
     ]
   })
+  tags = {
+    yor_trace = "e5059f40-8310-4652-9c05-5bc25569df36"
+  }
 }
 
 
 
 resource "aws_iam_role" "privesc-ssmSendCommand-role" {
-  name                = "privesc-ssmSendCommand-role"
-  assume_role_policy  = jsonencode({
+  name = "privesc-ssmSendCommand-role"
+  assume_role_policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
       {
@@ -39,12 +42,18 @@ resource "aws_iam_role" "privesc-ssmSendCommand-role" {
       },
     ]
   })
+  tags = {
+    yor_trace = "d95566f4-90d4-4079-8fe5-7fed6b6ac1ad"
+  }
 }
 
 
 resource "aws_iam_user" "privesc-ssmSendCommand-user" {
   name = "privesc-ssmSendCommand-user"
   path = "/"
+  tags = {
+    yor_trace = "ea7f57e0-daef-45d2-9b77-e1ac3355bcd3"
+  }
 }
 
 resource "aws_iam_access_key" "privesc-ssmSendCommand-user" {
@@ -63,5 +72,5 @@ resource "aws_iam_role_policy_attachment" "privesc-ssmSendCommand-role-attach-po
   role       = aws_iam_role.privesc-ssmSendCommand-role.name
   policy_arn = aws_iam_policy.privesc-ssmSendCommand-policy.arn
 
-}  
+}
 
