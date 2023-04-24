@@ -10,20 +10,23 @@ resource "aws_iam_policy" "privesc18-PassExistingRoleToNewGlueDevEndpoint" {
     Statement = [
       {
         Action = [
-	      "glue:CreateDevEndpoint",
-        "glue:GetDevEndpoint",
- 			  "iam:PassRole"			  
+          "glue:CreateDevEndpoint",
+          "glue:GetDevEndpoint",
+          "iam:PassRole"
         ]
         Effect   = "Allow"
         Resource = "*"
       },
     ]
   })
+  tags = {
+    yor_trace = "31dee18e-342a-4a27-8680-537d08d19cb3"
+  }
 }
 
 resource "aws_iam_role" "privesc18-PassExistingRoleToNewGlueDevEndpoint-role" {
-  name                = "privesc18-PassExistingRoleToNewGlueDevEndpoint-role"
-  assume_role_policy  = jsonencode({
+  name = "privesc18-PassExistingRoleToNewGlueDevEndpoint-role"
+  assume_role_policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
       {
@@ -36,11 +39,17 @@ resource "aws_iam_role" "privesc18-PassExistingRoleToNewGlueDevEndpoint-role" {
       },
     ]
   })
+  tags = {
+    yor_trace = "e3ea9bc3-8a58-45ed-9463-b70cadef3540"
+  }
 }
 
 resource "aws_iam_user" "privesc18-PassExistingRoleToNewGlueDevEndpoint-user" {
   name = "privesc18-PassExistingRoleToNewGlueDevEndpoint-user"
   path = "/"
+  tags = {
+    yor_trace = "75372081-c495-467a-890a-13a304884bf6"
+  }
 }
 
 resource "aws_iam_access_key" "privesc18-PassExistingRoleToNewGlueDevEndpoint-user" {

@@ -12,21 +12,24 @@ resource "aws_iam_policy" "fp1-allow-and-deny" {
     Statement = [
       {
         Effect   = "Allow",
-        Action = "iam:*",        
+        Action   = "iam:*",
         Resource = "*"
       },
       {
         Effect   = "Deny",
-        Action = "iam:*",        
+        Action   = "iam:*",
         Resource = "*"
       }
     ]
   })
+  tags = {
+    yor_trace = "785cf8ae-46ac-4cbe-8c88-325e45b58746"
+  }
 }
 
 resource "aws_iam_role" "fp1-allow-and-deny-role" {
-  name                = "fp1-allow-and-deny-role"
-  assume_role_policy  = jsonencode({
+  name = "fp1-allow-and-deny-role"
+  assume_role_policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
       {
@@ -39,15 +42,21 @@ resource "aws_iam_role" "fp1-allow-and-deny-role" {
       },
     ]
   })
+  tags = {
+    yor_trace = "5291c0d2-e1f0-4ac0-8b9e-1a2f6fcb036f"
+  }
 }
 
 resource "aws_iam_user" "fp1-allow-and-deny-user" {
   name = "fp1-allow-and-deny-user"
   path = "/"
+  tags = {
+    yor_trace = "05e8a46b-7380-4e1a-8e59-fa1c81fcc839"
+  }
 }
 
 resource "aws_iam_access_key" "fp1-allow-and-deny-user" {
- user = aws_iam_user.fp1-allow-and-deny-user.name
+  user = aws_iam_user.fp1-allow-and-deny-user.name
 }
 
 resource "aws_iam_user_policy_attachment" "fp1-allow-and-deny-user-attach-policy" {

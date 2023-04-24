@@ -18,11 +18,14 @@ resource "aws_iam_policy" "privesc17-EditExistingLambdaFunctionWithRole" {
       },
     ]
   })
+  tags = {
+    yor_trace = "7f9fb865-a1d1-48a0-8a31-5b87761159bf"
+  }
 }
 
 resource "aws_iam_role" "privesc17-EditExistingLambdaFunctionWithRole-role" {
-  name                = "privesc17-EditExistingLambdaFunctionWithRole-role"
-  assume_role_policy  = jsonencode({
+  name = "privesc17-EditExistingLambdaFunctionWithRole-role"
+  assume_role_policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
       {
@@ -35,11 +38,17 @@ resource "aws_iam_role" "privesc17-EditExistingLambdaFunctionWithRole-role" {
       },
     ]
   })
+  tags = {
+    yor_trace = "f6bf0d62-3c92-4f85-9005-23feb01522b9"
+  }
 }
 
 resource "aws_iam_user" "privesc17-EditExistingLambdaFunctionWithRole-user" {
   name = "privesc17-EditExistingLambdaFunctionWithRole-user"
   path = "/"
+  tags = {
+    yor_trace = "b104277e-8639-4d06-9ced-92b36ba4cdae"
+  }
 }
 
 resource "aws_iam_access_key" "privesc17-EditExistingLambdaFunctionWithRole-user" {

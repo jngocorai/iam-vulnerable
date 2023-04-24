@@ -11,12 +11,15 @@ resource "aws_iam_policy" "privesc-high-priv-service-policy" {
     Version = "2012-10-17"
     Statement = [
       {
-        Action = "*"
+        Action   = "*"
         Effect   = "Allow"
         Resource = "*"
       },
     ]
   })
+  tags = {
+    yor_trace = "ec44040f-8f87-4054-9d8a-be4b0075a29b"
+  }
 }
 
 data "aws_iam_policy" "AmazonSSMManagedInstanceCore" {
@@ -24,8 +27,8 @@ data "aws_iam_policy" "AmazonSSMManagedInstanceCore" {
 }
 
 resource "aws_iam_role" "privesc-high-priv-service-role" {
-  name                = "privesc-high-priv-service-role"
-  assume_role_policy  = jsonencode({
+  name = "privesc-high-priv-service-role"
+  assume_role_policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
       {
@@ -44,16 +47,22 @@ resource "aws_iam_role" "privesc-high-priv-service-role" {
             "eks.amazonaws.com",
             "sagemaker.amazonaws.com",
             "elasticbeanstalk.amazonaws.com"
-          ]            
+          ]
         }
       },
     ]
   })
+  tags = {
+    yor_trace = "27d8cb1c-c596-4dee-89b1-3968089340cd"
+  }
 }
 
 resource "aws_iam_instance_profile" "privesc-high-priv-service-policy_profile" {
- name = "privesc-high-priv-service-profile"
- role = aws_iam_role.privesc-high-priv-service-role.name
+  name = "privesc-high-priv-service-profile"
+  role = aws_iam_role.privesc-high-priv-service-role.name
+  tags = {
+    yor_trace = "b861394e-c4fa-4938-919b-385d35e44914"
+  }
 }
 
 
@@ -62,7 +71,7 @@ resource "aws_iam_role_policy_attachment" "privesc-high-priv-service-role-attach
   role       = aws_iam_role.privesc-high-priv-service-role.name
   policy_arn = aws_iam_policy.privesc-high-priv-service-policy.arn
 
-}  
+}
 resource "aws_iam_role_policy_attachment" "privesc-high-priv-service-role-attach-policy2" {
   role       = aws_iam_role.privesc-high-priv-service-role.name
   policy_arn = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"

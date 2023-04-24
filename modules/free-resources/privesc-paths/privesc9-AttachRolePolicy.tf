@@ -9,17 +9,20 @@ resource "aws_iam_policy" "privesc9-AttachRolePolicy" {
     Version = "2012-10-17"
     Statement = [
       {
-        Action = "iam:AttachRolePolicy"
+        Action   = "iam:AttachRolePolicy"
         Effect   = "Allow"
         Resource = "*"
       },
     ]
   })
+  tags = {
+    yor_trace = "190ae151-9108-4081-bb10-cc09ae78db2e"
+  }
 }
 
 resource "aws_iam_role" "privesc9-AttachRolePolicy-role" {
-  name                = "privesc9-AttachRolePolicy-role"
-  assume_role_policy  = jsonencode({
+  name = "privesc9-AttachRolePolicy-role"
+  assume_role_policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
       {
@@ -32,16 +35,22 @@ resource "aws_iam_role" "privesc9-AttachRolePolicy-role" {
       },
     ]
   })
+  tags = {
+    yor_trace = "a084be7d-cda2-4aba-b7d5-d005d43d6922"
+  }
 }
 
 resource "aws_iam_user" "privesc9-AttachRolePolicy-user" {
   name = "privesc9-AttachRolePolicy-user"
   path = "/"
+  tags = {
+    yor_trace = "a654e4ba-7cd9-4a98-81fc-a2be2727a87c"
+  }
 }
 
- resource "aws_iam_access_key" "privesc9-AttachRolePolicy-user" {
-   user = aws_iam_user.privesc9-AttachRolePolicy-user.name
- }
+resource "aws_iam_access_key" "privesc9-AttachRolePolicy-user" {
+  user = aws_iam_user.privesc9-AttachRolePolicy-user.name
+}
 
 
 resource "aws_iam_user_policy_attachment" "privesc9-AttachRolePolicy-user-attach-policy" {
